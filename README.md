@@ -1,5 +1,20 @@
 # react-data-display
-(Work in Progress/Experimental) Small library based on the react-virtualized for displaying data in different ways (e.g. regular table or list)
+
+This is a **work in progress**, API **will** most likely change.
+
+`react-data-display` is build upon fantastic `react-virtualized` library. We provide simple and clear abstraction layer
+for defining the data model and data presentation layer. You describe your data using `DataField` components, provide data
+to the `DataDisplay` component and use preferred view component (at this point `TableView` and `ListView` components are available).
+
+Plans for the very near future:
+
+* add support for nested `<DataField>` components ("subheaders")
+* improve `<ListView>` implementation
+* improve everything regarding width/height (fixed values and auto-sizing/filling the parent component sizes)
+* add simple default styles
+* add support for style customization
+* implement support for custom label and "cell" components
+* implement redux-connected version of the `<DataDisplay>`
 
 ## Notes
 
