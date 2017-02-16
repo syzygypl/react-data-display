@@ -15,10 +15,11 @@ Plans for the very near future:
 * add support for style customization
 * implement support for custom label and "cell" components
 * implement redux-connected version of the `<DataDisplay>`
+* improve build setup (esp. for npm publishing)
 
 ## Notes
 
-Build configuration is yet to be added
+Build configuration is copied from the react-virtualized.
 
 ## Basic Usage Example
 
