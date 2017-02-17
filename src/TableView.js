@@ -5,20 +5,28 @@ import { AutoSizer, MultiGrid } from 'react-virtualized';
 const STYLE = {
   border: '1px solid #ddd',
   overflow: 'hidden'
-}
+};
+
 const STYLE_BOTTOM_LEFT_GRID = {
-  borderRight: '2px solid #aaa',
-  backgroundColor: '#f7f7f7'
-}
+  borderRight: '1px solid #aaa',
+  backgroundColor: '#f7f7f7',
+  boxShadow: '2px 2px 2px #ccc',
+};
+
+const STYLE_BOTTOM_RIGHT_GRID = {
+};
+
 const STYLE_TOP_LEFT_GRID = {
-  borderBottom: '2px solid #aaa',
-  borderRight: '2px solid #aaa',
-  fontWeight: 'bold'
-}
+  borderBottom: '1px solid #aaa',
+  borderRight: '1px solid #aaa',
+  fontWeight: 'bold',
+  boxShadow: '2px 2px 2px #ccc',
+};
+
 const STYLE_TOP_RIGHT_GRID = {
-  borderBottom: '2px solid #aaa',
-  fontWeight: 'bold'
-}
+  borderBottom: '1px solid #aaa',
+  fontWeight: 'bold',
+};
 
 // To understand what's going on in the component, start with render() method
 // In short, we take the data defined on the DataField inside TableView and use 
@@ -131,6 +139,9 @@ export class TableView extends React.Component {
 
         const content = showHeader && rowIndex === 0 ? dataFieldElement.props.label : (showHeader ? data[rowIndex - 1][fieldKey] : data[rowIndex][fieldKey]);
 
+
+        // header & subheaders
+
         /*
         if (showHeader && rowIndex === 0) {
             // render header (label)
@@ -141,15 +152,20 @@ export class TableView extends React.Component {
         }
         */
 
+        // if no custom content/cell/header component is passed from the user, use the default one
+        // like DefaultCell/DefaultContentCell/DefaultHeaderCell
+
 
         return (
             <div
-                className={{}}
+                className={''}
                 key={key}
                 style={style}
             >
-                {/*{columnIndex}, {rowIndex}*/}
-                {content}
+                <div style={{ padding: '5px' }}>
+                    {/*{columnIndex}, {rowIndex}*/}
+                    {content}
+                </div>
             </div>
         )
     }
@@ -163,13 +179,26 @@ export class TableView extends React.Component {
 
             fixedColumns,
             fixedHeader,
+
+            className,
+            style,
+
+            styleHeader,
+            styleHeaderSticky,
+            styleContent,
+            styleContentSticky,
         } = this.props;
 
         const columnCount = this.getColumnCount();
         const rowCount = this.getRowCount();
 
+        const containerStyle = {
+            height: fixedHeight || '100%', 
+            ...style,
+        };
+
         return (
-            <div style={fixedHeight ? { height: fixedHeight } : { height: '100%' }}>
+            <div style={containerStyle} className={className}>
             <AutoSizer disableHeight={!fillParentHeight || !!fixedHeight} disableWidth={!fillParentWidth || !!fixedWidth}>
                 {({ width = fixedWidth, height = fixedHeight }) => { 
                     return (
@@ -183,9 +212,10 @@ export class TableView extends React.Component {
                             rowHeight={40}
                             rowCount={rowCount}
                             style={STYLE}
-                            styleBottomLeftGrid={STYLE_BOTTOM_LEFT_GRID}
-                            styleTopLeftGrid={STYLE_TOP_LEFT_GRID}
-                            styleTopRightGrid={STYLE_TOP_RIGHT_GRID}
+                            styleBottomLeftGrid={styleContentSticky || STYLE_BOTTOM_LEFT_GRID}
+                            styleBottomRightGrid={styleContent || STYLE_BOTTOM_RIGHT_GRID}
+                            styleTopLeftGrid={styleHeaderSticky || STYLE_TOP_LEFT_GRID}
+                            styleTopRightGrid={styleHeader || STYLE_TOP_RIGHT_GRID}
                             width={width}
                         />
                     )
@@ -205,6 +235,15 @@ TableView.propTypes = {
 
     // children: PropTypes.arrayOf(PropTypes.element),
     // single element OR array of elements (DataFields)
+
+    // add support for using custom className and styles for the container
+    className: PropTypes.string,
+    style: PropTypes.object,
+
+    styleHeader: PropTypes.object,
+    styleHeaderSticky: PropTypes.object,
+    styleContent: PropTypes.object,
+    styleContentSticky: PropTypes.object,
 };
 
 TableView.defaultProps = {

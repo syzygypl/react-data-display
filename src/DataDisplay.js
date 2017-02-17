@@ -8,7 +8,7 @@ import ListView from './ListView.js';
 export class DataDisplay extends React.Component {
     render() {
         // common props for both TableView and ListView
-        const { data, width, fillParentWidth, scrollToRow, showScrollPlaceholder } = this.props;
+        const { data, width, fillParentWidth, scrollToRow, showScrollPlaceholder, style, className } = this.props;
 
         const children = this.props.children;
 
@@ -66,8 +66,13 @@ export class DataDisplay extends React.Component {
             throw new Error("Child component of DataDisplay can only be TableView or ListView");
         }
 
+        const containerStyle = {
+            height: '100%', 
+            ...style,
+        };
+
         return (
-            <div style={{ height: '100%' }}>
+            <div style={containerStyle} className={className}>
                 {viewComponent}
             </div>
         );
@@ -116,6 +121,10 @@ DataDisplay.propTypes = {
 
     // @TODO: add custom validation for children elements
     // children: 
+
+    // add support for using custom className and styles for the container
+    style: PropTypes.object,
+    className: PropTypes.string,
 };
 
 

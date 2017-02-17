@@ -13,8 +13,14 @@ Plans for the very near future:
 * improve everything regarding width/height (fixed values and auto-sizing/filling the parent component sizes)
 * add simple default styles
 * add support for style customization
-* implement support for custom label and "cell" components
+* implement support for custom label and content/"cell" components
 * implement redux-connected version of the `<DataDisplay>`
+
+Later improvements:
+
+* make generic `View` component that `TableView` and `ListView` (and later possibly other) can inherit. Such component
+would contain common logic/utils, e.g. for processing `<DataField>` components
+
 * improve build setup (esp. for npm publishing)
 
 ## Notes

@@ -55,12 +55,20 @@ export class ListView extends React.Component {
             fillParentHeight,
             fixedHeight,
             fixedWidth,
+            style,
+            className,
         } = this.props;
 
         const rowCount = this.getRowCount();
 
+
+        const containerStyle = {
+            height: fixedHeight || '100%', 
+            ...style,
+        };
+
         return (
-            <div style={{ height: '100%' }}>
+            <div style={containerStyle} className={className}>
                 <CellMeasurer cellRenderer={({ rowIndex, ...rest }) => this.rowRenderer({ index: rowIndex, ...rest })} rowCount={rowCount} columnCount={1}>
                     {({ getRowHeight }) => {
                         return (
@@ -83,6 +91,10 @@ export class ListView extends React.Component {
 ListView.propTypes = {
     // children: PropTypes.arrayOf(PropTypes.element),
     // single element OR array of elements (DataFields)
+
+    // add support for using custom className and styles for the container
+    className: PropTypes.string,
+    style: PropTypes.object,
 };
 
 ListView.defaultProps = {

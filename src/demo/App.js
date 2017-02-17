@@ -10,15 +10,17 @@ const data = [
     // more items
 ];
 
-export class App extends React.Component {
+export default class App extends React.Component {
     render() {
         return (
             <DataDisplay data={data} height={200}>
                 <TableView fixedColumns={1}>
+                {/*<ListView>*/}
                     <DataField field="id" label="ID" width={100} />
                     <DataField field="name" label="NAME" width={150} />
                     <DataField field="test" label="TEST" width={250} />
                     <DataField field="test" label="TEST (again)" width={200} />
+                {/*<ListView>*/}
                 </TableView>
             </DataDisplay>
         );
