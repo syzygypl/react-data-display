@@ -14,6 +14,7 @@ export default class App extends React.Component {
     render() {
         return (
             <DataDisplay data={data} height={200}>
+                {/*<TableView fixedColumns={1} fixedHeader={false}>*/}
                 <TableView fixedColumns={1}>
                 {/*<ListView>*/}
                     <DataField field="id" label="ID" width={100} />

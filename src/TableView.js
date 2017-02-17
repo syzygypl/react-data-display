@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { AutoSizer, MultiGrid } from 'react-virtualized'; 
 
+import DefaultTableCell from './DefaultTableCell';
+
 // styles from react-virtualized example
 const STYLE = {
   border: '1px solid #ddd',
@@ -162,10 +164,11 @@ export class TableView extends React.Component {
                 key={key}
                 style={style}
             >
-                <div style={{ padding: '5px' }}>
-                    {/*{columnIndex}, {rowIndex}*/}
-                    {content}
-                </div>
+                <DefaultTableCell
+                    rowIndex={rowIndex}
+                    columnIndex={columnIndex}
+                    cellValue={content}
+                />
             </div>
         )
     }
