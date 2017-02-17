@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const config = {
   devtool: 'eval',
   entry: {
-    demo: './source/demo/index'
+    demo: './src/demo/index'
   },
   output: {
     path: 'build',
@@ -26,12 +26,12 @@ const config = {
       {
         test: /\.js$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'source')
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
         loaders: ['style', 'css?modules&importLoaders=1', 'postcss'],
-        include: path.join(__dirname, 'source')
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
